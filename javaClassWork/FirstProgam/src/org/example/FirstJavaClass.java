@@ -11,6 +11,16 @@ public class FirstJavaClass {
         snum = 150;
         System.out.println(snum);
 
+        int inum = 12;
+        System.out.println(inum);
+        Integer number =13;
+        System.out.println(number);
+
+        System.out.println("This prints\n quotes literally \" b \" ");
+        System.out.println('\u00d1');
+
+
+
         long lnum = -12332252626L;
         System.out.println(lnum);
 
