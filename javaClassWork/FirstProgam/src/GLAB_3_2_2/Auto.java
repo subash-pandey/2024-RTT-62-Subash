@@ -1,7 +1,7 @@
 package GLAB_3_2_2;
 
 
-public class AutoPromoteTest {
+public class Auto {
     public static void main(String[] args)
     {
         byte b = 42;
