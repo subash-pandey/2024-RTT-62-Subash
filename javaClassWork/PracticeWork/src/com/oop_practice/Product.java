@@ -7,6 +7,23 @@ public class Product {
     private boolean beverage;
     private int quantityAvailable;
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "price=" + price +
+                ", name='" + name + '\'' +
+                ", beverage=" + beverage +
+                ", quantityAvailable=" + quantityAvailable +
+                '}';
+    }
+
+    public int getQuantityAvailable() {
+        return quantityAvailable;
+    }
+
+    public void setQuantityAvailable(int quantityAvailable) {
+        this.quantityAvailable = quantityAvailable;
+    }
 
     // constructor with no args - by default this is included with the java language
     public Product() {
