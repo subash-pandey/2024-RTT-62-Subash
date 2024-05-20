@@ -20,6 +20,7 @@ public class Main {
         coffeeShop = new CoffeeShop();
         coffeeShop.initProducts();
         coffeeShop.printProducts();
+        coffeeShop.getCheapProducts();
     }
 
     // we only have 1 public static void main for the whole coffee shop project

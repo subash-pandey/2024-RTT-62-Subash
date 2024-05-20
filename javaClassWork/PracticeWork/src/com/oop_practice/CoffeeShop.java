@@ -2,6 +2,7 @@ package com.oop_practice;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CoffeeShop {
 
@@ -35,11 +36,17 @@ public class CoffeeShop {
         products.addAll(productFromFile);
     }
 
+    public void getCheapProducts(){
+        ArrayList<Product> cheapProducts = (ArrayList<Product>) products.stream().filter(product ->product.getPrice()<5).collect(Collectors.toList());
+        cheapProducts.forEach(product -> System.out.println(product.getName()));
+    }
+
     // print the list of products available for sale
     public void printProducts() {
         for ( int pos = 0 ; pos < products.size() ; pos++ ) {
             Product product = products.get(pos);
             System.out.println((pos+1) + ") " + product.getName() + "\t" + product.getPrice() );
         }
+       // products.forEach(product ->System.out.println( product.getName() + "\t" + product.getPrice() ));
     }
 }
