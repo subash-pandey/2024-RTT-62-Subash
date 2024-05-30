@@ -12,7 +12,7 @@ group by productline_id;
 -- I want to see a list of employees and all of the customers for that employee.   Employee name will be duplicated in the result set.   I want to see the employee first and last name
 -- and the customer contact first and last name as well as the customer name
 
-select e.id as employee_id, e.firstname as employee_first_name, e.lastname as employee_last_name,c.contact_firstname,c.contact_lastname
+select e.id as employee_id, e.firstname as employee_first_name, e.lastname as employee_last_name,c.customer_name,c.contact_firstname,c.contact_lastname
 from customers c ,employees e
 where e.id = c.sales_rep_employee_id
 order by e.id;
@@ -21,7 +21,8 @@ order by e.id;
 -- I want to see a list of employees in each office.   Show the office name and the employee name
 select o.id, o.city,e.firstname,e.lastname
 from employees e,offices o 
-where e.office_id = o.id;
+where e.office_id = o.id
+order by o.city;
 
 -- question 0.4
 -- I want to see the totaly number of each employee type based on job title.. result should the job title and the number of employess with that job title.
@@ -31,17 +32,20 @@ group by job_title;
 
 -- question 0.5
 -- I want to see a list of all payments each customer has made.  Order the list by custoemr name ascending, then by the payment amount descending
-select c.customer_name,sum(od.quantity_ordered*od.price_each) as total_cost_price
-from orderdetails od, orders o, customers c
-where c.id = o.customer_id and o.id = od.order_id
+select c.customer_name,sum(p.amount) as all_payments
+from payments p, customers c
+where c.id = p.customer_id
 group by c.customer_name
 order by c.customer_name;
 
-select c.customer_name,sum(od.quantity_ordered*od.price_each) as total_cost_price
-from orderdetails od, orders o, customers c
-where c.id = o.customer_id and o.id = od.order_id
+select c.customer_name,sum(p.amount) as all_payments
+from payments p, customers c
+where c.id = p.customer_id
 group by c.customer_name
-order by total_cost_price desc;
+order by all_payments desc;
+
+
+
 
 
 -- question 0.6
@@ -54,10 +58,10 @@ select * from customers where id not in (select customer_id from orders);
 
 -- Question 1
 -- How many customer are handled by each office.  I want to see the office name and the count of the number of customers in that office.
-select o.city, count(c.id) as customer_handled
+select o.id, o.city, count(c.id) as customer_handled
 from customers c, employees e , offices o 
 where e.id = c.sales_rep_employee_id and e.office_id = o.id
-group by o.city;
+group by o.id, o.city;
 
 
 -- Question 2
@@ -118,28 +122,31 @@ group by year(order_date);
 -- Question 7
 -- I want to see the top 5 products based on quantity sold across all orders
 select  p.product_name  ,sum(quantity_ordered) as quantity_sold
-from products p, orderdetails od
-where p.id = od.product_id
+from products p, orderdetails od, orders o
+where p.id = od.product_id and od.order_id = o.id  and o.status != 'Cancelled'
 group by p.product_name
 order by quantity_sold desc
 limit  5;
 
 -- question 7.5
 -- how many times has each product appeared in an order reguardless of how many were purchased.
-select  p.id,p.product_name, sum(quantity_ordered) as total_quantity_ordered
-from products p, orderdetails od, orders o 
-where p.id = od.product_id and o.id = od.order_id
-group by p.id,p.product_name
-order by p.id;
+select p.product_name, count(od.product_id) as counts
+from orderdetails od, products p, orders o 
+where od.order_id = o.id and od.product_id = p.id
+group by p.product_name
+order by counts desc;
+
 
 -- question 7.6
 -- how many products would be out of stock based on the amount sold acrosss item.  -- not sure if the data will support this .. basically 
 -- looking for any product where the sum of the quantity sold is greater than the quantity in stock
-select p.product_name,sum(od.quantity_ordered) as ordered , sum(p.quantity_in_stock)as in_stock
-from orderdetails od join products p
-ON od.product_id = p.id
-group by p.product_name
-having ordered>=in_stock;
+select p.id, p.product_name,p.quantity_in_stock as in_stock,sum(od.quantity_ordered) as shipped
+from products p, orderdetails od,orders o
+where p.id = od.product_id and o.id = od.order_id  and not o.status = 'Cancelled'
+group by p.id
+having shipped> in_stock
+order by p.id;
+
 
 -- question 7.9
 -- I want to see the distinct order status ordered alphabetically

@@ -44,7 +44,47 @@ select od.*,(quantity_ordered*price_each) as total_price
  from orderdetails od, products p,orders o, customers c
  where order_id =10425 and od.product_id =p.id and od.order_id = o.id and c.id= o.customer_id
  order by order_line_number;
+ -- this is new 
  
  -- 
- select * from employees;
+ select e.* from employees e;
+ 
+ -- this is a new query
+ -- I want to see the sum  total cost for all line for order 10425
+ 
+select sum(quantity_ordered*price_each) as total_price, max(quantity_ordered), min(quantity_ordered),avg( quantity_ordered*price_each),count(*) as number_of_products
+ from orderdetails od
+ group by order_id;
+ 
+ -- I want to see the total order cost of all orders
+ select * from orderdetails;
+ select order_id, sum(quantity_ordered*price_each),count(*) 
+ from orderdetails where order_id in( 10103,10104)
+ group by order_id ;
+ 
+ -- Now I want to see total amount the customer has spent
+ select c.customer_name,o.id as  order_id,od.product_id
+ from customers c , orders o, orderdetails od
+ where c.id = o.customer_id and o.id =od.order_id
+ order by c.customer_name,order_id;
+ 
+ select c.id,c.customer_name,o.id as  order_id,od.product_id, (od.quantity_ordered*od.price_each) as line_item_cost
+ from customers c , orders o, orderdetails od
+ where c.id = o.customer_id and o.id =od.order_id
+ order by c.customer_name,order_id;
+
+ select c.id, c.customer_name,o.id as order_id, sum(od.quantity_ordered*od.price_each) as total_customer_spend
+ from customers c , orders o, orderdetails od
+ where c.id = o.customer_id and o.id =od.order_id
+ group by c.id,o.id
+ order by c.customer_name ;
+ 
+ -- I want to see orders over 50 k
+ select c.id, c.customer_name,o.id as order_id, sum(od.quantity_ordered*od.price_each) as total_customer_spend
+ from customers c , orders o, orderdetails od
+ where c.id = o.customer_id and o.id =od.order_id
+ group by c.id,o.id
+ having total_customer_spend>60000
+ order by c.customer_name ;
+ 
  
