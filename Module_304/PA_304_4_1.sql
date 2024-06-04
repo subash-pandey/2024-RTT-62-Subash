@@ -45,3 +45,10 @@ select product_name as Name,pl.product_line as Product_Line , p.product_scale,p.
 from products p,productlines pl
 where p.productline_id = pl.id and (pl.id =1 or pl.id = 7)
 order by product_line desc,Name;
+
+-- Select list of products that have never been sold
+select * from products p where p.id not in(select product_id from orderdetails);
+
+select * ,(select count(*) from orderdetails od where od.product_id = p.id) as product_count
+from products p
+order by product_count;
