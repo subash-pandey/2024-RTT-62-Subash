@@ -1,12 +1,13 @@
 package org.example.database.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
-
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "customers")
 public class Customer {
@@ -26,10 +27,10 @@ public class Customer {
     @Column(name ="phone")
     private String phone;
 
-    @Column(name ="adress_line1")
+    @Column(name ="address_line1")
     private String addressLine1;
 
-    @Column(name ="adress_line2")
+    @Column(name ="address_line2")
     private String addressLine2;
 
     @Column(name ="city")
@@ -47,7 +48,7 @@ public class Customer {
     @Column(name ="sales_rep_employee_id")
     private Integer salesRepEmployeeId;
 
-    @Column(name ="credit_limit" )
+    @Column(name ="credit_limit",columnDefinition = "DECIMAL")
     private Double creditLimit;
 
 

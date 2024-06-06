@@ -3,12 +3,13 @@ package org.example.database.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
-
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "products")
 public class Product {
@@ -34,13 +35,13 @@ public class Product {
     @Column(name ="product_description")
     private String productDescription;
 
-    @Column(name ="quantity_in_stock")
+    @Column(name ="quantity_in_stock",columnDefinition = "SMALLINT")
     private String quantityInStock;
 
-    @Column(name ="buy_price")
+    @Column(name ="buy_price",columnDefinition = "DECIMAL")
     private Double buyPrice;
 
-    @Column(name ="msrp")
+    @Column(name ="msrp",columnDefinition = "DECIMAL")
     private Double msrp;
 
     

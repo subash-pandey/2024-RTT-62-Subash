@@ -3,12 +3,15 @@ package org.example.database.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.Date;
 
 @Setter
 @Getter
-
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -19,14 +22,17 @@ public class Order {
     @Column(name = "customer_id")
     private Integer customerId;
 
+    @Temporal(TemporalType.DATE)
     @Column(name ="order_date")
-    private String orderDate;
+    private Date orderDate;
 
+    @Temporal(TemporalType.DATE)
     @Column(name ="required_date")
-    private String requiredDate;
+    private Date  requiredDate;
 
+    @Temporal(TemporalType.DATE)
     @Column(name ="shipped_date")
-    private String shippedDate;
+    private Date shippedDate;
 
     @Column(name ="comments")
     private String comments;
