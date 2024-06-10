@@ -10,7 +10,7 @@ public class MainCustomer {
     public static void main(String[] args) {
 
         // Now creating a customer object for inserting a customer object into the mysql
-        
+
         Customer customer = new Customer();
         customer.setCustomerName("Subash Inc");
         customer.setContactFirstName("Subash");

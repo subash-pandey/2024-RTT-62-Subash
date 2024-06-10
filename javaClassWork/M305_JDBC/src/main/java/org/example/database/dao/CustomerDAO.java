@@ -1,8 +1,10 @@
 package org.example.database.dao;
 
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.example.database.entity.Customer;
 import org.example.database.entity.Employee;
+import org.example.database.entity.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -14,12 +16,21 @@ public class CustomerDAO {
     public Customer findById(int id) {
         SessionFactory factory = new Configuration().configure().buildSessionFactory();
         Session session =factory.openSession();
-        String hql = "Select c from Customer c where c.id = :id";
+        String hql = "Select c from Customer c where c.id = :xid";
         TypedQuery<Customer> query =session.createQuery(hql, Customer.class);
-        query.setParameter("id", id);
-        Customer customer = query.getSingleResult();
-        session.close();
-        return customer;
+        query.setParameter("xid", id);
+        try {
+            Customer customer = query.getSingleResult();
+            return customer;
+        }
+        catch (NoResultException e) {
+            return null;
+        }
+        finally {
+            session.close();
+        }
+
+
     }
     public void insert(Customer customer) {
         // these 2 lines of code prepare the hibernate session for use
@@ -65,4 +76,5 @@ public class CustomerDAO {
         session.close();
         return result;
     }
+
 }

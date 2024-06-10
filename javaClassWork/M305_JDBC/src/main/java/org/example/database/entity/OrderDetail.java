@@ -17,14 +17,29 @@ public class OrderDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "order_id")
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY, optional =true)
+    @JoinColumn(name = "order_id", nullable = true)
+    private Order order;
+
+    @Column(name = "order_id",insertable = false, updatable = false)
     private Integer orderId;
 
-    @Column(name ="product_id")
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY, optional =true)
+    @JoinColumn(name = "product_id", nullable = true)
+    private Product product;
+
+    @Column(name = "quantity_ordered")
+    private Integer quantityOrdered =0;
+
+    @Column(name ="product_id",insertable = false,updatable = false)
     private Integer productId;
 
     @Column(name ="price_each", columnDefinition = "DECIMAL")
-    private Double priceEach;
+    private Double priceEach =0.0;
+
+
 
     @Column(name ="order_line_number",columnDefinition = "SMALLINT")
     private Integer orderLineNumber;

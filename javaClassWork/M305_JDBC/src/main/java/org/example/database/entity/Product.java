@@ -5,6 +5,8 @@ package org.example.database.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -16,6 +18,10 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<OrderDetail> orderDetails;
 
     @Column(name = "product_code")
     private String productCode;
@@ -36,7 +42,7 @@ public class Product {
     private String productDescription;
 
     @Column(name ="quantity_in_stock",columnDefinition = "SMALLINT")
-    private String quantityInStock;
+    private Integer quantityInStock;
 
     @Column(name ="buy_price",columnDefinition = "DECIMAL")
     private Double buyPrice;
