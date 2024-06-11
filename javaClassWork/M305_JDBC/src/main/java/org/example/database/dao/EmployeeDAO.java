@@ -2,6 +2,7 @@ package org.example.database.dao;
 
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
+import org.example.database.entity.Customer;
 import org.example.database.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -100,6 +101,24 @@ public class EmployeeDAO {
         session.getTransaction().begin();
         session.delete(employee);
         session.getTransaction().commit();
+        session.close();
+    }
+
+    public void insert(Employee employee) {
+        // these 2 lines of code prepare the hibernate session for use
+        SessionFactory factory = new Configuration().configure().buildSessionFactory();
+        Session session = factory.openSession();
+
+        // begin the transaction
+        session.getTransaction().begin();
+
+        // insert the employee to the database
+        session.save(employee);
+
+        /// commit our transaction
+        session.getTransaction().commit();
+
+        // cleanup the session
         session.close();
     }
 }
