@@ -54,5 +54,20 @@ public class Employee {
     @Column(name = "profile_image_url")
     private String profileImageUrl;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        Employee employee = (Employee) o;
+        return getId().equals(employee.getId()) && getLastname().equals(employee.getLastname()) && getFirstname().equals(employee.getFirstname());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId().hashCode();
+        result = 31 * result + getLastname().hashCode();
+        result = 31 * result + getFirstname().hashCode();
+        return result;
+    }
 }

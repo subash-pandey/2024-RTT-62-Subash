@@ -5,6 +5,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 
@@ -21,7 +23,6 @@ public class EmployeeDAOTest {
        }
 
     }
-
 
 
     @Test
@@ -58,15 +59,30 @@ public class EmployeeDAOTest {
         Employee actual = employeeDAO.findById(employee.getId());
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(employee.getFirstname(), actual.getFirstname());
+        Assertions.assertEquals(employee.getLastname(), actual.getLastname());
+        Assertions.assertEquals(employee.getEmail(), actual.getEmail());
+        Assertions.assertEquals(employee.getOfficeId(), actual.getOfficeId());
+        Assertions.assertEquals(employee.getReportsTo(), actual.getReportsTo());
+        Assertions.assertEquals(employee.getExtension(), actual.getExtension());
+        Assertions.assertEquals(employee.getJobTitle(), actual.getJobTitle());
+        Assertions.assertEquals(employee.getJobTitle(), actual.getJobTitle());
+        Assertions.assertEquals(employee.getFirstname(), actual.getFirstname());
+
+        employeeDAO.delete(employee);
 
     }
 
-    @Test
-    public void findByFirstNameTest(){
-        List<Employee> employees = employeeDAO.findByFirstName("Aarush");
+    @ParameterizedTest
+    @CsvSource({"Leslie","Tom"})
+    public void findByFirstNameTest(String firstName){
+        List<Employee> employees = employeeDAO.findByFirstName(firstName);
 
         Assertions.assertNotNull(employees);
         Assertions.assertTrue(employees.size() > 0);
-        Assertions.assertTrue(employees.stream().anyMatch(employee -> employee.getFirstname().equals("Aarush")));
+
+        for(Employee employee : employees){
+            Assertions.assertEquals(firstName, employee.getFirstname());
+        }
+
     }
 }
