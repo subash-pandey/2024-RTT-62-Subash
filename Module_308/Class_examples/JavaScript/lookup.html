@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="class1" id="hiTag">This is a header tag 1</h1>
+    <h1 name="hiTag">This is a header tag 2</h1>
+    <h1  name="hiTag" class="class1">This is a header tag</h1>
+    <script>
+        let element =document.getElementById("hiTag");
+        console.log(element);
+        let items = document.getElementsByName("hiTag");
+        for(let element of items){
+            console.log(element);
+        }
+        console.log("==========H1 Tags===================")
+        let h1 = document.getElementsByTagName("h1");
+        for(let h1Key of h1){
+            console.log(h1Key);
+        }
+
+        // find all elements with a CSS Class on them
+        // this is the most common way of looking for elements in the DOM tree
+        console.log("================= getElementsByClassName =================");
+        let classItems = document.getElementsByClassName("class1");
+
+        for (let classItem of classItems) {
+            console.log(classItem);
+            classItem.style.color = "RED";
+        }
+
+    </script>
+</body>
+</html>
