@@ -1,4 +1,4 @@
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="include/header.jsp"></jsp:include>
 <h1>
     Index page!!!!!
 </h1>
@@ -9,4 +9,4 @@
     <tr><td>name</td><td>${productKey.productName}</td></tr>
     <tr><td>description</td><td>${productKey.productDescription}</td></tr>
 </table>
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="include/footer.jsp"></jsp:include>
