@@ -1,7 +1,9 @@
 package com.example.springboot.controller;
 
 
+import com.example.springboot.database.dao.EmployeeDAO;
 import com.example.springboot.database.dao.ProductDAO;
+import com.example.springboot.database.entity.Employee;
 import com.example.springboot.database.entity.Product;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ public class IndexController {
 
     @Autowired
     private ProductDAO productDAO;
+
 
     @GetMapping("/")
     public ModelAndView index(@RequestParam(required = false) Integer id) {
@@ -51,17 +54,22 @@ public class IndexController {
     }
 
     @GetMapping("/search")
-    public ModelAndView search() {
+    public ModelAndView search(@RequestParam(required = false)String search) {
         ModelAndView response = new ModelAndView("search");
+        log.debug("The user  searches for the term "+search);
+        response.addObject("search", search);
 
 
-        List<Product> products = productDAO.findAll();
+        List<Product> products = productDAO.findByName(search);
         response.addObject("products", products);
 
 
 
         return response;
     }
+
+
+
 }
 
 

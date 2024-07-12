@@ -15,6 +15,23 @@
 
 </section>
 
+
+<section>
+    <div class="container">
+        <div class="row justify-content-center pt-5 pb-3">
+            <div class="col-8 text-center">
+                <form action ="/search">
+                    <div class="mb-3">
+                        <label for="search" class="form-label"><h4>Search</h4></label>
+                        <input type="text" value ="${search}" class="form-control" id="search" name="search" placeholder="Enter search term">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section style="background-color: white">
     <div class ="container">
         <div class ="row pt-5 pb-5">
@@ -25,7 +42,7 @@
     </div>
     <div class ="row pt-3">
         <div class ="col-12">
-            <table>
+            <table class ="table">
             <tr>
                 <th>id</th>
                 <th>code</th>
@@ -37,15 +54,16 @@
                 <tr>
 
 
-                    <td> ${product.id}</td>
+                    <td><a href="/index/${product.id}"></a> ${product.id}</td>
                     <td> ${product.productCode}</td>
                     <td> ${product.productName}</td>
                     <td> ${product.productDescription}</td>
 
                 </tr>
-                </table>
+
 
             </c:forEach>
+            </table>
 
         </div>
 
