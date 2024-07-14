@@ -22,8 +22,8 @@ import java.util.List;
 public class CustomerController {
     @Autowired
     private CustomerDAO customerDAO;
-    @Autowired
-    private EmployeeDAO employeeDAO;
+//    @Autowired
+//    private EmployeeDAO employeeDAO;
 
 
     @GetMapping("/customer/")
@@ -43,14 +43,6 @@ public class CustomerController {
 
         return response;
     }
-    @GetMapping("/customer/list/{salesRepId}")
-    public ModelAndView listPathVar(@PathVariable Integer salesRepId) {
-        ModelAndView response = new ModelAndView("customer-list");
-        Employee employee = employeeDAO.findById(salesRepId);
-        response.addObject("employee", employee);
-        List<Customer> customers = customerDAO.findBySalesRepEmployeeId(salesRepId);
-        response.addObject("customers", customers);
-        return response;
-    }
+
 }
 

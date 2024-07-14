@@ -19,6 +19,10 @@ public class Employee {
     @Column(name = "id")
     private Integer id;
 
+    @ToString.Exclude
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Customer> customers;
+
     @Column(name = "office_id")
     private Integer officeId;
 

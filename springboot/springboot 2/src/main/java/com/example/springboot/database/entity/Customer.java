@@ -49,6 +49,12 @@ public class Customer {
     private String country;
 
 
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY, optional =true)
+    @JoinColumn(name = "sales_rep_employee_id", nullable = true)
+    private Employee employee;
+
+
     @Column(name ="sales_rep_employee_id",insertable = false, updatable = false)
     private Integer salesRepEmployeeId;
 

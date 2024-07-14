@@ -59,7 +59,7 @@
                     <td> ${employee.lastName}</td>
                     <td> ${employee.firstName}</td>
                     <td> ${employee.officeId}</td>
-                    <td><a href="http://localhost:8080/customer/list/${employee.id}"> Details</a></td>
+                    <td><a href="http://localhost:8080/employee/${employee.id}"> Details</a></td>
 
                 </tr>
 

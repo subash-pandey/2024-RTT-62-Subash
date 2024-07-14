@@ -17,7 +17,7 @@
 <section style="background-color: white">
     <div class="container">
         <div class="row pt-5 pb-5">
-            <h2 class="text-center">Customers found (${customers.size()})</h2>
+            <h2 class="text-center">Customers found (${employee.customers.size()})</h2>
         </div>
     </div>
     <div class="row pt-3">
@@ -31,7 +31,7 @@
                     <th>Contact Last Name</th>
                     <th>Order List</th>
                 </tr>
-                <c:forEach items="${customers}" var="customer">
+                <c:forEach items="${employee.customers}" var="customer">
                     <tr>
                         <td><a href ="/customer/index/${customer.id}">${customer.id}</a></td>
                         <td>${customer.salesRepEmployeeId}</td>

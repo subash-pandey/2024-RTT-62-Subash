@@ -2,6 +2,7 @@ package com.example.springboot.controller;
 
 import com.example.springboot.database.dao.EmployeeDAO;
 import com.example.springboot.database.entity.Employee;
+import com.example.springboot.database.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @Controller
 
 public class EmployeeController {
+
     @Autowired
     private EmployeeDAO employeeDAO;
 
@@ -30,13 +32,17 @@ public class EmployeeController {
         return response;
     }
 
-//    @GetMapping("/employee/details/{employeeId}")
-//    public ModelAndView employeeDetail(@PathVariable Integer employeeId) {
-//        ModelAndView response = new ModelAndView("customer-list");
-//        Employee employee = employeeDAO.findById(employeeId);
-//        response.addObject("employee", employee);
-//        return response;
-//    }
+    @GetMapping("/employee/{id}")
+    public ModelAndView indexPathVar(@PathVariable Integer id) {
+        ModelAndView response = new ModelAndView("customer-list");
+        Employee employee = employeeDAO.findById(id);
+        response.addObject("employee", employee);
+
+        return response;
+    }
+
+
+
 
 
 }

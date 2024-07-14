@@ -31,10 +31,10 @@ public class Employee {
     private Integer officeId;
 
     @Column(name = "lastname")
-    private String lastname;
+    private String lastName;
 
     @Column(name = "firstname")
-    private String firstname;
+    private String firstName;
 
     @Column(name = "extension")
     private String extension;
@@ -60,14 +60,14 @@ public class Employee {
         if (o == null || getClass() != o.getClass()) return false;
 
         Employee employee = (Employee) o;
-        return getId().equals(employee.getId()) && getLastname().equals(employee.getLastname()) && getFirstname().equals(employee.getFirstname());
+        return getId().equals(employee.getId()) && getLastName().equals(employee.getLastName()) && getFirstName().equals(employee.getFirstName());
     }
 
     @Override
     public int hashCode() {
         int result = getId().hashCode();
-        result = 31 * result + getLastname().hashCode();
-        result = 31 * result + getFirstname().hashCode();
+        result = 31 * result + getLastName().hashCode();
+        result = 31 * result + getFirstName().hashCode();
         return result;
     }
 }
