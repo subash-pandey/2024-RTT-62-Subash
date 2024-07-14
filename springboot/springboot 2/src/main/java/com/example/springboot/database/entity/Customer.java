@@ -1,9 +1,8 @@
-package org.example.database.entity;
+package com.example.springboot.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.awt.print.Book;
 import java.util.List;
 
 @Setter
@@ -18,9 +17,6 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ToString.Exclude
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Order> orders;
 
     @Column(name = "customer_name")
     private String customerName;
@@ -30,6 +26,7 @@ public class Customer {
 
     @Column(name ="contact_firstname")
     private String contactFirstName;
+
     @Column(name ="phone")
     private String phone;
 
@@ -50,12 +47,6 @@ public class Customer {
 
     @Column(name ="country")
     private String country;
-
-
-      @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY, optional =true)
-    @JoinColumn(name = "sales_rep_employee_id", nullable = true)
-    private Employee employee;
 
 
     @Column(name ="sales_rep_employee_id",insertable = false, updatable = false)

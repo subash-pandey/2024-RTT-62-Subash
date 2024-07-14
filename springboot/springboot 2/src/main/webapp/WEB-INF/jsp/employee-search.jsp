@@ -47,6 +47,7 @@
                 <th>Last Name</th>
                 <th>First Name</th>
                 <th>Office Id</th>
+                <th>Costumer List</th>
 
             </tr>
 
@@ -58,6 +59,7 @@
                     <td> ${employee.lastName}</td>
                     <td> ${employee.firstName}</td>
                     <td> ${employee.officeId}</td>
+                    <td><a href="http://localhost:8080/customer/list/${employee.id}"> Details</a></td>
 
                 </tr>
 
