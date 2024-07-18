@@ -8,7 +8,7 @@
 
 
 
-<table class="table">
+<table class="table table-striped">
     <tr>
         <td>Id</td>
         <td>${customer.id}</td>

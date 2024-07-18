@@ -5,11 +5,12 @@
     <div class="row pt-5 pb-5">
         <h1 class="text-center">Customer Page List for employee  ${employee.id} </h1>
     </div>
-    <table class="table">
+    <table class="table table-hover table-bordered">
         <tr><td>id</td><td>${employee.id}</td></tr>
         <tr><td>First Name</td><td>${employee.firstName}</td></tr>
        <tr><td>LastName</td><td>${employee.lastName}</td></tr>
        <tr><td>Position</td><td>${employee.jobTitle}</td></tr>
+        <tr><td>Office</td><td>${employee.office.city}</td></tr>
     </table>
 
 </section>
@@ -22,7 +23,7 @@
     </div>
     <div class="row pt-3">
         <div class="col-12">
-            <table class="table">
+            <table class="table table-bordered">
                 <tr>
                     <th>Id</th>
                     <th>Customer Rep Id</th>

@@ -1,0 +1,30 @@
+package com.example.springboot.form;
+
+import jakarta.validation.constraints.NotEmpty;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.validator.constraints.Length;
+
+@Getter
+@Setter
+@ToString
+public class CreateEmployeeFormBean {
+
+    @NotEmpty(message="Email is required")
+    private String email;
+
+    @Length(max =50, message ="First name must be less than 50 characters")
+    @NotEmpty(message ="First Name is required")
+    private String firstName;
+
+    @NotEmpty(message ="We do need a last Name")
+    private String lastName;
+
+    private Integer reportsTo;
+    private Integer officeId;
+    private String  jobTitle;
+    private String extension;
+
+
+}

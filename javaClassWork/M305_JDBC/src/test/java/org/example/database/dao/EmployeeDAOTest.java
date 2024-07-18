@@ -33,7 +33,7 @@ public class EmployeeDAOTest {
         Employee employee = employeeDAO.findById(givenId);
         Assertions.assertNotNull(employee);
         Assertions.assertEquals(givenId, employee.getId());
-        Assertions.assertEquals("Diane",employee.getFirstname());
+        Assertions.assertEquals("Diane",employee.getFirstName());
 
     }
 
@@ -46,8 +46,8 @@ public class EmployeeDAOTest {
      @Test
     public void insertTest(){
         Employee employee = new Employee();
-        employee.setFirstname("Aarush");
-        employee.setLastname("Pandey");
+        employee.setFirstName("Aarush");
+        employee.setLastName("Pandey");
         employee.setEmail("aarush@gmail.com");
         employee.setOfficeId(4);
         employee.setReportsTo(1102);
@@ -58,15 +58,15 @@ public class EmployeeDAOTest {
 
         Employee actual = employeeDAO.findById(employee.getId());
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(employee.getFirstname(), actual.getFirstname());
-        Assertions.assertEquals(employee.getLastname(), actual.getLastname());
+        Assertions.assertEquals(employee.getFirstName(), actual.getFirstName());
+        Assertions.assertEquals(employee.getLastName(), actual.getLastName());
         Assertions.assertEquals(employee.getEmail(), actual.getEmail());
         Assertions.assertEquals(employee.getOfficeId(), actual.getOfficeId());
         Assertions.assertEquals(employee.getReportsTo(), actual.getReportsTo());
         Assertions.assertEquals(employee.getExtension(), actual.getExtension());
         Assertions.assertEquals(employee.getJobTitle(), actual.getJobTitle());
         Assertions.assertEquals(employee.getJobTitle(), actual.getJobTitle());
-        Assertions.assertEquals(employee.getFirstname(), actual.getFirstname());
+        Assertions.assertEquals(employee.getFirstName(), actual.getFirstName());
 
         employeeDAO.delete(employee);
 
@@ -81,7 +81,7 @@ public class EmployeeDAOTest {
         Assertions.assertTrue(employees.size() > 0);
 
         for(Employee employee : employees){
-            Assertions.assertEquals(firstName, employee.getFirstname());
+            Assertions.assertEquals(firstName, employee.getFirstName());
         }
 
     }
