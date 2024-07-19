@@ -35,7 +35,7 @@ public class EmployeeController {
     private OfficeDAO officeDAO;
 
     @GetMapping("/search")
-    public ModelAndView employeeSearch(@RequestParam(required = false)String employeeSearch) {
+    public ModelAndView employeeSearch(@RequestParam(required = false) String employeeSearch) {
 
         ModelAndView response = new ModelAndView("employee-search");
 
@@ -65,6 +65,7 @@ public class EmployeeController {
 
         return response;
     }
+
     @GetMapping("/edit")
     public ModelAndView edit(@RequestParam(required = false) Integer id) {
         ModelAndView response = new ModelAndView("create-employee");
@@ -92,7 +93,6 @@ public class EmployeeController {
         }
         return response;
     }
-
 
 
     // this is /employee/createSubmit
@@ -164,9 +164,6 @@ public class EmployeeController {
             return response;
         }
     }
-
-
-
 
 
 }
