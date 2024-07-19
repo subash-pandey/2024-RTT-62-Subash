@@ -65,6 +65,35 @@ public class EmployeeController {
 
         return response;
     }
+    @GetMapping("/edit")
+    public ModelAndView edit(@RequestParam(required = false) Integer id) {
+        ModelAndView response = new ModelAndView("create-employee");
+        List<Employee> employees = employeeDAO.findAll();
+        response.addObject("reportsToEmployees", employees);
+
+        List<Office> offices = officeDAO.findAll();
+        response.addObject("offices", offices);
+
+        if (id != null) {
+            Employee employee = employeeDAO.findById(id);
+            if (employee != null) {
+                CreateEmployeeFormBean form = new CreateEmployeeFormBean();
+                form.setEmployeeId(employee.getId());
+                form.setEmail(employee.getEmail());
+                form.setFirstName(employee.getFirstName());
+                form.setLastName(employee.getLastName());
+                form.setExtension(employee.getExtension());
+                form.setJobTitle(employee.getJobTitle());
+                form.setOfficeId(employee.getOffice().getId());
+                form.setReportsTo(employee.getReportsTo());
+
+                response.addObject("form", form);
+            }
+        }
+        return response;
+    }
+
+
 
     // this is /employee/createSubmit
     @GetMapping("/createSubmit")
@@ -104,7 +133,11 @@ public class EmployeeController {
             log.info(form.toString());
 
             // setting the incoming user input onto a new Employee object to be saved to the database
-            Employee employee = new Employee();
+            Employee employee = employeeDAO.findById(form.getEmployeeId());
+            if (employee == null) {
+                employee = new Employee();
+            }
+
             employee.setEmail(form.getEmail());
             employee.setFirstName(form.getFirstName());
             employee.setLastName(form.getLastName());
@@ -131,6 +164,8 @@ public class EmployeeController {
             return response;
         }
     }
+
+
 
 
 

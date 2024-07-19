@@ -48,6 +48,8 @@
                 <th>First Name</th>
                 <th>Office Id</th>
                 <th>Costumer List</th>
+                <th>Edit Information</th>
+
 
             </tr>
 
@@ -60,6 +62,7 @@
                     <td> ${employee.firstName}</td>
                     <td> ${employee.officeId}</td>
                     <td><a href="http://localhost:8080/employee/${employee.id}"> Details</a></td>
+                    <td><a href="http://localhost:8080/employee/edit?id=${employee.id}"> Edit</a></td>
 
                 </tr>
 

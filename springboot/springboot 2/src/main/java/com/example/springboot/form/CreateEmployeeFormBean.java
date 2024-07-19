@@ -11,6 +11,8 @@ import org.hibernate.validator.constraints.Length;
 @ToString
 public class CreateEmployeeFormBean {
 
+    private Integer employeeId;
+
     @NotEmpty(message="Email is required")
     private String email;
 
