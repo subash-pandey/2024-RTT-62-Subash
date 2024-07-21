@@ -12,8 +12,6 @@ import java.util.List;
 public interface CustomerDAO  extends JpaRepository<Customer,Long> {
     Customer findById(Integer id);
 
-
-
     List<Customer> findBySalesRepEmployeeId(Integer salesRepEmployeeId);
 
 }

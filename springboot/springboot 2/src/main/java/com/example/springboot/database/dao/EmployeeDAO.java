@@ -20,4 +20,7 @@ public interface EmployeeDAO extends JpaRepository<Employee,Long> {
     List<Employee> findByLastName( String name);
 
   Office findByOfficeId(Integer officeId);
+
+
+          List<Employee> findByJobTitle(String jobTitle);
 }

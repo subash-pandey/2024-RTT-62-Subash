@@ -29,7 +29,7 @@
                         </div>
                         <div class="col-4">
                             <input type="text" id="emailId" name="email" class="form-control
-                                  <c:if test ="${bindingResult.hasFieldErrors('email')}">id-invalid</c:if>"
+                                  <c:if test ="${bindingResult.hasFieldErrors('email')}">is-invalid</c:if>"
                                    value="${form.email}">
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-4">
                             <input type="text" id="firstNameId" name="firstName" class="form-control
-                             <c:if test ="${bindingResult.hasFieldErrors('firstName')}">id-invalid</c:if>"
+                             <c:if test ="${bindingResult.hasFieldErrors('firstName')}">is-invalid</c:if>"
                                    value="${form.firstName}">
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                         </div>
                         <div class="col-4">
                             <input type="text" id="lastNameId" name="lastName" class="form-control
-                           <c:if test ="${bindingResult.hasFieldErrors('lastName')}">id-invalid</c:if>"
+                           <c:if test ="${bindingResult.hasFieldErrors('lastName')}">is-invalid</c:if>"
                                    value="${form.lastName}">
                         </div>
                     </div>
