@@ -1,6 +1,7 @@
 package com.example.springboot.form;
 
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,7 +11,10 @@ import lombok.ToString;
 @ToString
 public class CreateCustomerFormBean {
 
+
     private Integer customerId;
+
+    @NotEmpty(message ="Customer Name is required")
     private String customerName;
     private String contactFirstName;
     private String contactLastName;

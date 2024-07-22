@@ -15,7 +15,7 @@ public class CreateEmployeeFormBean {
     private Integer employeeId;
 
     @NotEmpty(message="Email is required")
-    @EmployeeEmailUnique(message = "Email has to be unique!!!")
+//    @EmployeeEmailUnique(message = "Email has to be unique!!!")
     private String email;
 
     @Length(max =50, message ="First name must be less than 50 characters")
