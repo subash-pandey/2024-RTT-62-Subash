@@ -4,7 +4,6 @@ import com.example.springboot.database.dao.EmployeeDAO;
 import com.example.springboot.database.dao.OfficeDAO;
 import com.example.springboot.database.entity.Employee;
 import com.example.springboot.database.entity.Office;
-import com.example.springboot.database.entity.Product;
 import com.example.springboot.form.CreateEmployeeFormBean;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import static org.hibernate.query.sqm.tree.SqmNode.log;
 
@@ -54,14 +53,22 @@ public class EmployeeController {
         return response;
     }
 
+    private void loadDropDowns(ModelAndView response) {
+        List<Employee> employees = employeeDAO.findAll();
+        response.addObject("employees", employees);
+        List<Office> offices = officeDAO.findAll();
+        response.addObject("offices", offices);
+    }
+
     @GetMapping("/create")
     public ModelAndView create() {
         ModelAndView response = new ModelAndView("create-employee");
-        List<Employee> employees = employeeDAO.findAll();
-        response.addObject("reportsToEmployees", employees);
-
-        List<Office> offices = officeDAO.findAll();
-        response.addObject("offices", offices);
+//        List<Employee> employees = employeeDAO.findAll();
+//        response.addObject("reportsToEmployees", employees);
+//
+//        List<Office> offices = officeDAO.findAll();
+//        response.addObject("offices", offices);
+        loadDropDowns(response);
 
         return response;
     }
@@ -69,11 +76,12 @@ public class EmployeeController {
     @GetMapping("/edit")
     public ModelAndView edit(@RequestParam(required = false) Integer id) {
         ModelAndView response = new ModelAndView("create-employee");
-        List<Employee> employees = employeeDAO.findAll();
-        response.addObject("reportsToEmployees", employees);
-
-        List<Office> offices = officeDAO.findAll();
-        response.addObject("offices", offices);
+//        List<Employee> employees = employeeDAO.findAll();
+//        response.addObject("reportsToEmployees", employees);
+//
+//        List<Office> offices = officeDAO.findAll();
+//        response.addObject("offices", offices);
+        loadDropDowns(response);
 
         if (id != null) {
             Employee employee = employeeDAO.findById(id);
@@ -100,6 +108,12 @@ public class EmployeeController {
     public ModelAndView createSubmit(@Valid CreateEmployeeFormBean form, BindingResult bindingResult) {
         // argument to the constructor here is the view name - the view name can be a JSP location or a redirect URL
         ModelAndView response = new ModelAndView();
+        if(form.getEmployeeId() == null ) {
+            Employee employee = employeeDAO.findByEmailIgnoreCase(form.getEmail());
+            if (employee != null) {
+                bindingResult.rejectValue("email", "error.email.exists", "Email already exists");
+            }
+        }
 
         // the first thing we want to do is check if the incoming user input has any errors
         if (bindingResult.hasErrors()) {
@@ -112,12 +126,7 @@ public class EmployeeController {
             response.addObject("bindingResult", bindingResult);
 
             // because the page needs the list of employees for the drop down we need to add the list of employees to the model
-            List<Employee> reportsToEmployees = employeeDAO.findAll();
-            response.addObject("reportsToEmployees", reportsToEmployees);
-
-            // we need the list of offices
-            List<Office> offices = officeDAO.findAll();
-            response.addObject("offices", offices);
+            loadDropDowns(response);
 
             // im going to set the view name to be
             response.setViewName("create-employee");
