@@ -11,6 +11,7 @@
        <tr><td>LastName</td><td>${employee.lastName}</td></tr>
        <tr><td>Position</td><td>${employee.jobTitle}</td></tr>
         <tr><td>Office</td><td>${employee.office.city}</td></tr>
+        <tr><td>Image</td><td><img src="${employee.profileImageUrl}"></td></tr>
     </table>
 
 </section>

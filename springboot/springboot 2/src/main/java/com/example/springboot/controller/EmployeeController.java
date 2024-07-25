@@ -11,10 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -55,7 +52,7 @@ public class EmployeeController {
 
     private void loadDropDowns(ModelAndView response) {
         List<Employee> employees = employeeDAO.findAll();
-        response.addObject("employees", employees);
+        response.addObject("reportsToEmployees", employees);
         List<Office> offices = officeDAO.findAll();
         response.addObject("offices", offices);
     }
@@ -104,7 +101,7 @@ public class EmployeeController {
 
 
     // this is /employee/createSubmit
-    @GetMapping("/createSubmit")
+    @PostMapping ("/createSubmit")
     public ModelAndView createSubmit(@Valid CreateEmployeeFormBean form, BindingResult bindingResult) {
         // argument to the constructor here is the view name - the view name can be a JSP location or a redirect URL
         ModelAndView response = new ModelAndView();
@@ -168,7 +165,10 @@ public class EmployeeController {
             // however often times this would redirect to the edit page (which we have not created)
             // after the redirect is actually a URL not a view name
             // in some ways this is overriding the behavior of the setViewName to use a URL rather than a JSP file location
-            response.setViewName("redirect:/employee/" + employee.getId());
+//            response.setViewName("redirect:/employee/" + employee.getId());
+
+            loadDropDowns(response);
+            response.setViewName("create-employee");
 
             return response;
         }
