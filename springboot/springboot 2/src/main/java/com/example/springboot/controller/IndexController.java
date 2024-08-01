@@ -37,10 +37,10 @@ public class IndexController {
         Product product = productDAO.findById(id);
         response.addObject("productKey", product);
 
-        log.debug("Debug level");
-        log.info("Info level");
-        log.warn("Warning level");
-        log.error("Error level");
+//        log.debug("Debug level");
+//        log.info("Info level");
+//        log.warn("Warning level");
+//        log.error("Error level");
 
         return response;
     }
