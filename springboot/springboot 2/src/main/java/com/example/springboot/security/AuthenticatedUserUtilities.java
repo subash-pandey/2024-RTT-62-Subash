@@ -71,4 +71,5 @@ public class AuthenticatedUserUtilities {
         session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, sc);
     }
 
+
 }
